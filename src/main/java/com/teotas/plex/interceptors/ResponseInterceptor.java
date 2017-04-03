@@ -19,15 +19,15 @@ public class ResponseInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
 
-        Response reqResponse = chain.proceed(original);
+        Response returnedResponse = chain.proceed(original);
 
-        if(reqResponse.header("Content-Type").toLowerCase().contains("xml")){
-            String xmlToConvert = reqResponse.body().string();
+        if(returnedResponse.header("Content-Type").toLowerCase().contains("xml")){
+            String xmlToConvert = returnedResponse.body().string();
             JSONObject convertedXML = XML.toJSONObject(xmlToConvert);
             ResponseBody newBody = ResponseBody.create(MediaType.parse("application/json"), convertedXML.toString());
-            reqResponse = reqResponse.newBuilder().body(newBody).build();
+            returnedResponse = returnedResponse.newBuilder().body(newBody).build();
         }
 
-        return reqResponse;
+        return returnedResponse;
     }
 }

@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class PlexClientTest {
@@ -41,7 +40,7 @@ public class PlexClientTest {
 
     @Test
     public void getAllFriends(){
-        List<User> friends = plex.mediaServerAPI().getFriendsList();
+        ArrayList<User> friends = plex.mediaServerAPI().getFriendsList();
         Assert.assertTrue(!friends.isEmpty());
     }
 

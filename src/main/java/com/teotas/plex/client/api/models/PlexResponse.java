@@ -20,7 +20,6 @@ import java.util.List;
 @JsonInclude(Include.NON_NULL)
 public class PlexResponse<V> {
 
-    //JSON Elements
     @JsonProperty("user")
     private LoginResponse loginInfo;
 

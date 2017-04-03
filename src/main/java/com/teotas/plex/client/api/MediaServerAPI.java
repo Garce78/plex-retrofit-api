@@ -7,10 +7,7 @@ import com.teotas.plex.RetrofitClient;
 import com.teotas.plex.client.api.endpoints.MediaServerEndpoints;
 import com.teotas.plex.client.api.models.plexobjects.User;
 import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class MediaServerAPI {
     private MediaServerEndpoints endpoints;
