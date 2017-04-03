@@ -74,8 +74,8 @@
             <version>RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
             <version>RELEASE</version>
         </dependency>
     </dependencies>

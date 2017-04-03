@@ -1,6 +1,7 @@
 package com.teotas.plex.interceptors;
 
 import com.teotas.plex.PlexAPIConnection;
+import com.teotas.plex.client.api.LoginAPI;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -21,7 +22,7 @@ public class OAuthInterceptor implements Interceptor {
 
         Request.Builder requestBuilder = original.newBuilder()
                 .header("Content-Type", "application/json")
-                .header(RequiredPlexHeader.PLEX_TOKEN.header(), connection.getAuthToken())
+                .header(RequiredPlexHeader.PLEX_TOKEN.header(), getAuthToken())
                 .header(RequiredPlexHeader.PLEX_CLIENT_ID.header(), "PLEXRETROFITAPIV1" )
                 .header(RequiredPlexHeader.PLEX_PRODUCT.header(),"Plex Retrofit API" )
                 .header(RequiredPlexHeader.PLEX_VERSION.header(),"V1")
@@ -31,5 +32,13 @@ public class OAuthInterceptor implements Interceptor {
         Request updatedRequest = requestBuilder.build();
 
         return chain.proceed(updatedRequest);
+    }
+
+    private String getAuthToken(){
+        //TODO implement session check if necessary
+        if(connection.getAuthToken() == null){
+            connection.setAuthToken(new LoginAPI(connection).login().getAuthToken());
+        }
+        return connection.getAuthToken();
     }
 }
